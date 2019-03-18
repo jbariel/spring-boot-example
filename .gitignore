@@ -26,3 +26,6 @@ bin
 .project
 .settings
 
+build
+*.bin
+.gradle
