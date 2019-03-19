@@ -18,16 +18,19 @@
  */
 package com.jbariel.example.springboot.models;
 
+import javax.persistence.Entity;
+
 /**
  * @author Jarrett Bariel
  *
  */
+@Entity
 public class Student extends Person<Student> {
 
     /**
      * Year in school (grade) of the student
      */
-    private int grade;
+    protected int grade;
 
     /**
      * Default construtor.
@@ -63,6 +66,16 @@ public class Student extends Person<Student> {
      */
     public void setGrade(final int grade) {
         this.grade = grade;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected Student doUpdateFrom(final Student obj) {
+        if (0 < obj.getGrade())
+            setGrade(obj.getGrade());
+        return me();
     }
 
 }

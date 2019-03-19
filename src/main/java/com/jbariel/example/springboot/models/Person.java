@@ -18,6 +18,12 @@
  */
 package com.jbariel.example.springboot.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import org.h2.util.StringUtils;
+
 /**
  * Abstract management of the concept of a person
  * 
@@ -26,24 +32,25 @@ package com.jbariel.example.springboot.models;
  * @author Jarrett Bariel
  *
  */
+@Entity
 public abstract class Person<S extends Person<S>> {
 
     /**
      * Primary key as a long
      */
-    // @Id
-    // @Generated
-    private long id;
+    @Id
+    @GeneratedValue
+    protected long id;
 
     /**
      * Stores the first name for each implementation
      */
-    private String firstName;
+    protected String firstName;
 
     /**
      * Stores the last name for each implementation
      */
-    private String lastName;
+    protected String lastName;
 
     /**
      * Default construtor.
@@ -144,6 +151,32 @@ public abstract class Person<S extends Person<S>> {
      */
     public void setLastName(final String lastName) {
         this.lastName = lastName;
+    }
+
+    /**
+     * Requires compliance of all subclasses.
+     * 
+     * @param obj
+     *            of type {@code S} that we should update the fields in {@code this} object from
+     * @return {@link #me()}
+     *
+     */
+    protected abstract S doUpdateFrom(S obj);
+
+    /**
+     * @param obj
+     *            of type {@code S} that we should update the fields in {@code this} object from.
+     * @return {@link #me()}
+     *
+     */
+    public S updateFrom(final S obj) {
+        if (0 < obj.getId())
+            setId(obj.getId());
+        if (!StringUtils.isNullOrEmpty(obj.getFirstName()))
+            setFirstName(obj.getFirstName());
+        if (!StringUtils.isNullOrEmpty(obj.getLastName()))
+            setLastName(obj.getLastName());
+        return doUpdateFrom(obj);
     }
 
 }
