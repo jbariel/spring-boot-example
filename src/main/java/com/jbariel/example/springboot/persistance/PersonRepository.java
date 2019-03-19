@@ -20,16 +20,17 @@ package com.jbariel.example.springboot.persistance;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.jbariel.example.springboot.models.Student;
+import com.jbariel.example.springboot.models.Person;
 
 /**
- * Access for student repository autowiring.
+ * Keep the generic chain intact
  * 
+ * @param <T>
+ *            type of Person
  * @author Jarrett Bariel
- * 
  * @see JpaRepository
  *
  */
-public interface StudentRepository extends PersonRepository<Student> {
+public interface PersonRepository<T extends Person<T>> extends JpaRepository<T, Long> {
     // defaults
 }
