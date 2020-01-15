@@ -27,55 +27,53 @@ import javax.persistence.Entity;
 @Entity
 public class Student extends Person<Student> {
 
-    /**
-     * Year in school (grade) of the student
-     */
-    protected int grade;
+	/**
+	 * Year in school (grade) of the student
+	 */
+	protected int grade;
 
-    /**
-     * Default construtor.
-     *
-     */
-    public Student() {
-        super();
-    }
+	/**
+	 * Default construtor.
+	 *
+	 */
+	public Student() {
+		super();
+	}
 
-    /**
-     * @param grade
-     *            to set as part of the builder pattern
-     * @return self
-     *
-     */
-    public Student withGrade(final int grade) {
-        setGrade(grade);
-        return me();
-    }
+	/**
+	 * @param grade to set as part of the builder pattern
+	 * @return self
+	 *
+	 */
+	public Student withGrade(final int grade) {
+		setGrade(grade);
+		return me();
+	}
 
-    /**
-     * @return the grade
-     *
-     */
-    public int getGrade() {
-        return grade;
-    }
+	/**
+	 * @return the grade
+	 *
+	 */
+	public int getGrade() {
+		return grade;
+	}
 
-    /**
-     * @param grade
-     *            the grade to set
-     *
-     */
-    public void setGrade(final int grade) {
-        this.grade = grade;
-    }
+	/**
+	 * @param grade the grade to set
+	 *
+	 */
+	public void setGrade(final int grade) {
+		this.grade = grade;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected Student doUpdateFrom(final Student obj) {
-        if (0 < obj.getGrade())
-            setGrade(obj.getGrade());
-        return me();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected Student doUpdateFrom(final Student obj) {
+		if (0 < obj.getGrade())
+			setGrade(obj.getGrade());
+		return me();
+	}
 
 }

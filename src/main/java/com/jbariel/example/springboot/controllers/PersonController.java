@@ -37,102 +37,96 @@ import com.jbariel.example.springboot.persistance.PersonRepository;
  * 
  * @author Jarrett Bariel
  * 
- * @param <R>
- *            correct implementation {@link PersonRepository} type
- * @param <T>
- *            correct object type that extends {@link Person}
+ * @param <R> correct implementation {@link PersonRepository} type
+ * @param <T> correct object type that extends {@link Person}
  *
  */
 @RestController
 public abstract class PersonController<R extends PersonRepository<T>, T extends Person<T>> {
 
-    /**
-     * Default construtor.
-     *
-     */
-    public PersonController() {
-        super();
-    }
+	/**
+	 * Default construtor.
+	 *
+	 */
+	public PersonController() {
+		super();
+	}
 
-    /**
-     * @return the appropriate {@link PersonRepository} that is autowired
-     *
-     */
-    protected abstract R repo();
+	/**
+	 * @return the appropriate {@link PersonRepository} that is autowired
+	 *
+	 */
+	protected abstract R repo();
 
-    /**
-     * @return list of all {@code T} objects
-     *
-     */
-    @GetMapping("/")
-    @ResponseBody
-    public List<T> getAll() {
-        return repo().findAll();
-    }
+	/**
+	 * @return list of all {@code T} objects
+	 *
+	 */
+	@GetMapping("/")
+	@ResponseBody
+	public List<T> getAll() {
+		return repo().findAll();
+	}
 
-    /**
-     * @param id
-     *            to load
-     * @return {@code T} that was found, {@code null} if no {@code T} matches that id.
-     *
-     */
-    @GetMapping("/{id}")
-    @ResponseBody
-    public T getById(@PathVariable("id") final long id) {
-        return loadById(id);
-    }
+	/**
+	 * @param id to load
+	 * @return {@code T} that was found, {@code null} if no {@code T} matches that
+	 *         id.
+	 *
+	 */
+	@GetMapping("/{id}")
+	@ResponseBody
+	public T getById(@PathVariable("id") final long id) {
+		return loadById(id);
+	}
 
-    /**
-     * @param obj
-     *            {@code T} to save
-     * @return newly created {@code T}.
-     *
-     */
-    @PutMapping("/")
-    @ResponseBody
-    public T create(@RequestBody final T obj) {
-        return repo().save(obj);
-    }
+	/**
+	 * @param obj {@code T} to save
+	 * @return newly created {@code T}.
+	 *
+	 */
+	@PutMapping("/")
+	@ResponseBody
+	public T create(@RequestBody final T obj) {
+		return repo().save(obj);
+	}
 
-    /**
-     * @param id
-     *            of {@code T} to update
-     * @param obj
-     *            {@code T} parameters to update, can be only a partial set of parameters
-     * @return updated {@code T}, or {@code null} if no {@code T} was found
-     *
-     */
-    @PostMapping("/{id}")
-    @ResponseBody
-    public T updateById(@PathVariable("id") final long id, @RequestBody final T obj) {
-        T dbObj = loadById(id);
-        return (null == obj) ? null : repo().save(dbObj.updateFrom(obj));
-    }
+	/**
+	 * @param id  of {@code T} to update
+	 * @param obj {@code T} parameters to update, can be only a partial set of
+	 *            parameters
+	 * @return updated {@code T}, or {@code null} if no {@code T} was found
+	 *
+	 */
+	@PostMapping("/{id}")
+	@ResponseBody
+	public T updateById(@PathVariable("id") final long id, @RequestBody final T obj) {
+		T dbObj = loadById(id);
+		return (null == obj) ? null : repo().save(dbObj.updateFrom(obj));
+	}
 
-    /**
-     * @param id
-     *            of {@code T} to delete
-     * @return deleted {@code T}, or {@code null} if no {@code T} found.
-     *
-     */
-    @DeleteMapping("/{id}")
-    @ResponseBody
-    public T deleteById(@PathVariable("id") final long id) {
-        T dbObj = loadById(id);
-        repo().delete(dbObj);
-        return dbObj;
-    }
+	/**
+	 * @param id of {@code T} to delete
+	 * @return deleted {@code T}, or {@code null} if no {@code T} found.
+	 *
+	 */
+	@DeleteMapping("/{id}")
+	@ResponseBody
+	public T deleteById(@PathVariable("id") final long id) {
+		T dbObj = loadById(id);
+		repo().delete(dbObj);
+		return dbObj;
+	}
 
-    /**
-     * Keep the code DRY
-     * 
-     * @param id
-     *            to load
-     * @return {@code T} or {@code null} if no such object with that id exists
-     *
-     */
-    private T loadById(final long id) {
-        return repo().findById(id).orElse(null);
-    }
+	/**
+	 * Keep the code DRY
+	 * 
+	 * @param id to load
+	 * @return {@code T} or {@code null} if no such object with that id exists
+	 *
+	 */
+	private T loadById(final long id) {
+		return repo().findById(id).orElse(null);
+	}
 
 }

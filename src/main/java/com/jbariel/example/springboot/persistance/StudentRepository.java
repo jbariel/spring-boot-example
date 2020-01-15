@@ -31,5 +31,5 @@ import com.jbariel.example.springboot.models.Student;
  *
  */
 public interface StudentRepository extends PersonRepository<Student> {
-    // defaults
+	// defaults
 }

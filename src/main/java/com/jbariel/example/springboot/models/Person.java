@@ -27,156 +27,149 @@ import org.h2.util.StringUtils;
 /**
  * Abstract management of the concept of a person
  * 
- * @param <S>
- *            self reference to use builder patterns
+ * @param <S> self reference to use builder patterns
  * @author Jarrett Bariel
  *
  */
 @Entity
 public abstract class Person<S extends Person<S>> {
 
-    /**
-     * Primary key as a long
-     */
-    @Id
-    @GeneratedValue
-    protected long id;
+	/**
+	 * Primary key as a long
+	 */
+	@Id
+	@GeneratedValue
+	protected long id;
 
-    /**
-     * Stores the first name for each implementation
-     */
-    protected String firstName;
+	/**
+	 * Stores the first name for each implementation
+	 */
+	protected String firstName;
 
-    /**
-     * Stores the last name for each implementation
-     */
-    protected String lastName;
+	/**
+	 * Stores the last name for each implementation
+	 */
+	protected String lastName;
 
-    /**
-     * Default construtor.
-     *
-     */
-    public Person() {
-        super();
-    }
+	/**
+	 * Default construtor.
+	 *
+	 */
+	public Person() {
+		super();
+	}
 
-    /**
-     * @return cast version of {@code this}
-     *
-     */
-    @SuppressWarnings("unchecked")
-    protected S me() {
-        return (S) this;
-    }
+	/**
+	 * @return cast version of {@code this}
+	 *
+	 */
+	@SuppressWarnings("unchecked")
+	protected S me() {
+		return (S) this;
+	}
 
-    /**
-     * @param id
-     *            to set as part of the builder pattern
-     * @return self
-     *
-     */
-    public S withId(final long id) {
-        setId(id);
-        return me();
-    }
+	/**
+	 * @param id to set as part of the builder pattern
+	 * @return self
+	 *
+	 */
+	public S withId(final long id) {
+		setId(id);
+		return me();
+	}
 
-    /**
-     * @param firstName
-     *            to set as part of the builder pattern
-     * @return self
-     *
-     */
-    public S withFirstName(final String firstName) {
-        setFirstName(firstName);
-        return me();
-    }
+	/**
+	 * @param firstName to set as part of the builder pattern
+	 * @return self
+	 *
+	 */
+	public S withFirstName(final String firstName) {
+		setFirstName(firstName);
+		return me();
+	}
 
-    /**
-     * @param lastName
-     *            to set as part of the builder pattern
-     * @return self
-     *
-     */
-    public S withLastName(final String lastName) {
-        setLastName(lastName);
-        return me();
-    }
+	/**
+	 * @param lastName to set as part of the builder pattern
+	 * @return self
+	 *
+	 */
+	public S withLastName(final String lastName) {
+		setLastName(lastName);
+		return me();
+	}
 
-    /**
-     * @return the id
-     *
-     */
-    public long getId() {
-        return id;
-    }
+	/**
+	 * @return the id
+	 *
+	 */
+	public long getId() {
+		return id;
+	}
 
-    /**
-     * @param id
-     *            the id to set
-     *
-     */
-    public void setId(final long id) {
-        this.id = id;
-    }
+	/**
+	 * @param id the id to set
+	 *
+	 */
+	public void setId(final long id) {
+		this.id = id;
+	}
 
-    /**
-     * @return the firstName
-     *
-     */
-    public String getFirstName() {
-        return firstName;
-    }
+	/**
+	 * @return the firstName
+	 *
+	 */
+	public String getFirstName() {
+		return firstName;
+	}
 
-    /**
-     * @param firstName
-     *            the firstName to set
-     *
-     */
-    public void setFirstName(final String firstName) {
-        this.firstName = firstName;
-    }
+	/**
+	 * @param firstName the firstName to set
+	 *
+	 */
+	public void setFirstName(final String firstName) {
+		this.firstName = firstName;
+	}
 
-    /**
-     * @return the lastName
-     *
-     */
-    public String getLastName() {
-        return lastName;
-    }
+	/**
+	 * @return the lastName
+	 *
+	 */
+	public String getLastName() {
+		return lastName;
+	}
 
-    /**
-     * @param lastName
-     *            the lastName to set
-     *
-     */
-    public void setLastName(final String lastName) {
-        this.lastName = lastName;
-    }
+	/**
+	 * @param lastName the lastName to set
+	 *
+	 */
+	public void setLastName(final String lastName) {
+		this.lastName = lastName;
+	}
 
-    /**
-     * Requires compliance of all subclasses.
-     * 
-     * @param obj
-     *            of type {@code S} that we should update the fields in {@code this} object from
-     * @return {@link #me()}
-     *
-     */
-    protected abstract S doUpdateFrom(S obj);
+	/**
+	 * Requires compliance of all subclasses.
+	 * 
+	 * @param obj of type {@code S} that we should update the fields in {@code this}
+	 *            object from
+	 * @return {@link #me()}
+	 *
+	 */
+	protected abstract S doUpdateFrom(S obj);
 
-    /**
-     * @param obj
-     *            of type {@code S} that we should update the fields in {@code this} object from.
-     * @return {@link #me()}
-     *
-     */
-    public S updateFrom(final S obj) {
-        if (0 < obj.getId())
-            setId(obj.getId());
-        if (!StringUtils.isNullOrEmpty(obj.getFirstName()))
-            setFirstName(obj.getFirstName());
-        if (!StringUtils.isNullOrEmpty(obj.getLastName()))
-            setLastName(obj.getLastName());
-        return doUpdateFrom(obj);
-    }
+	/**
+	 * @param obj of type {@code S} that we should update the fields in {@code this}
+	 *            object from.
+	 * @return {@link #me()}
+	 *
+	 */
+	public S updateFrom(final S obj) {
+		if (0 < obj.getId())
+			setId(obj.getId());
+		if (!StringUtils.isNullOrEmpty(obj.getFirstName()))
+			setFirstName(obj.getFirstName());
+		if (!StringUtils.isNullOrEmpty(obj.getLastName()))
+			setLastName(obj.getLastName());
+		return doUpdateFrom(obj);
+	}
 
 }

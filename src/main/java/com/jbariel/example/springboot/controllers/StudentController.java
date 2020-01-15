@@ -35,26 +35,26 @@ import com.jbariel.example.springboot.persistance.StudentRepository;
 @RequestMapping("/students")
 public class StudentController extends PersonController<StudentRepository, Student> {
 
-    /**
-     * Default construtor.
-     *
-     */
-    public StudentController() {
-        super();
-    }
+	/**
+	 * Default construtor.
+	 *
+	 */
+	public StudentController() {
+		super();
+	}
 
-    /**
-     * Wire in access to JPA assets
-     */
-    @Autowired
-    private StudentRepository studentRepository;
+	/**
+	 * Wire in access to JPA assets
+	 */
+	@Autowired
+	private StudentRepository studentRepository;
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected StudentRepository repo() {
-        return studentRepository;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected StudentRepository repo() {
+		return studentRepository;
+	}
 
 }

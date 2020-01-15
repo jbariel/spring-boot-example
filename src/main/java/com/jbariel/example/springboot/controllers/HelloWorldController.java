@@ -33,31 +33,30 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/hello")
 public class HelloWorldController {
 
-    /**
-     * Default construtor.
-     *
-     */
-    public HelloWorldController() {
-        super();
-    }
+	/**
+	 * Default construtor.
+	 *
+	 */
+	public HelloWorldController() {
+		super();
+	}
 
-    /**
-     * @return "Hello World"
-     *
-     */
-    @GetMapping("/")
-    public String sayHello() {
-        return "Hello World!";
-    }
+	/**
+	 * @return "Hello World"
+	 *
+	 */
+	@GetMapping("/")
+	public String sayHello() {
+		return "Hello World!";
+	}
 
-    /**
-     * @param name
-     *            String name to return
-     * @return "Hello {name}!"
-     *
-     */
-    @GetMapping("/{name}")
-    public String sayHello(@PathVariable("name") final String name) {
-        return "Hello " + name + "!";
-    }
+	/**
+	 * @param name String name to return
+	 * @return "Hello {name}!"
+	 *
+	 */
+	@GetMapping("/{name}")
+	public String sayHello(@PathVariable("name") final String name) {
+		return "Hello " + name + "!";
+	}
 }

@@ -28,8 +28,7 @@ import com.jbariel.example.springboot.models.Person;
 /**
  * @author Jarrett Bariel
  * 
- * @param <T>
- *            any {@link Person}
+ * @param <T> any {@link Person}
  *
  */
 @RunWith(SpringRunner.class)

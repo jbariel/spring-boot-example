@@ -42,54 +42,51 @@ import org.springframework.test.web.servlet.MockMvc;
 @AutoConfigureMockMvc
 public class HelloWorldControllerTest {
 
-    /**
-     * Simulate our mock object
-     */
-    @Autowired
-    private MockMvc mockMvc;
+	/**
+	 * Simulate our mock object
+	 */
+	@Autowired
+	private MockMvc mockMvc;
 
-    /**
-     * Check default behavior in {@link HelloWorldController#sayHello()}
-     * 
-     * @throws Exception
-     *             if things go horribly wrong
-     *
-     */
-    @Test
-    public void shouldReturnDefaultMessage() throws Exception {
-        checkNamedParam(null);
-    }
+	/**
+	 * Check default behavior in {@link HelloWorldController#sayHello()}
+	 * 
+	 * @throws Exception if things go horribly wrong
+	 *
+	 */
+	@Test
+	public void shouldReturnDefaultMessage() throws Exception {
+		checkNamedParam(null);
+	}
 
-    /**
-     * Check behavior of {@link HelloWorldController#sayHello(String)}
-     * 
-     * @throws Exception
-     *             if things go horribly wrong
-     * 
-     * @see #checkNamedParam(String)
-     *
-     */
-    @Test
-    public void shouldReturnNamedMessageByParameter() throws Exception {
-        checkNamedParam("Jarrett");
-        checkNamedParam("Bob");
-        checkNamedParam("frank");
-        checkNamedParam("joey the nose");
-    }
+	/**
+	 * Check behavior of {@link HelloWorldController#sayHello(String)}
+	 * 
+	 * @throws Exception if things go horribly wrong
+	 * 
+	 * @see #checkNamedParam(String)
+	 *
+	 */
+	@Test
+	public void shouldReturnNamedMessageByParameter() throws Exception {
+		checkNamedParam("Jarrett");
+		checkNamedParam("Bob");
+		checkNamedParam("frank");
+		checkNamedParam("joey the nose");
+	}
 
-    /**
-     * 
-     * keep code DRY
-     * 
-     * @param param
-     *            String to send as a param and check output - use {@code null} to test defaultMessage
-     * @throws Exception
-     *             if things go horribly wrong
-     *
-     */
-    protected void checkNamedParam(final String param) throws Exception {
-        String output = (StringUtils.isNullOrEmpty(param)) ? "World" : param;
-        this.mockMvc.perform(get("/hello/" + (null == param ? "" : param))).andDo(print()).andExpect(status().isOk())
-                .andExpect(content().string(containsString("Hello " + output + "!")));
-    }
+	/**
+	 * 
+	 * keep code DRY
+	 * 
+	 * @param param String to send as a param and check output - use {@code null} to
+	 *              test defaultMessage
+	 * @throws Exception if things go horribly wrong
+	 *
+	 */
+	protected void checkNamedParam(final String param) throws Exception {
+		String output = (StringUtils.isNullOrEmpty(param)) ? "World" : param;
+		this.mockMvc.perform(get("/hello/" + (null == param ? "" : param))).andDo(print()).andExpect(status().isOk())
+				.andExpect(content().string(containsString("Hello " + output + "!")));
+	}
 }

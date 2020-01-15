@@ -30,14 +30,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SpringBootExampleApplication {
 
-    /**
-     * Entry point that is autoconfigured by spring
-     * 
-     * @param args
-     *
-     */
-    public static void main(final String[] args) {
-        SpringApplication.run(SpringBootExampleApplication.class, args);
-    }
+	/**
+	 * Entry point that is autoconfigured by spring
+	 * 
+	 * @param args
+	 *
+	 */
+	public static void main(final String[] args) {
+		SpringApplication.run(SpringBootExampleApplication.class, args);
+	}
 
 }

@@ -25,12 +25,11 @@ import com.jbariel.example.springboot.models.Person;
 /**
  * Keep the generic chain intact
  * 
- * @param <T>
- *            type of Person
+ * @param <T> type of Person
  * @author Jarrett Bariel
  * @see JpaRepository
  *
  */
 public interface PersonRepository<T extends Person<T>> extends JpaRepository<T, Long> {
-    // defaults
+	// defaults
 }
